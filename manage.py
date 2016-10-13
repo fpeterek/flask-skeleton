@@ -15,7 +15,7 @@ from src.settings import app_config
 from src.data.base import Base
 from src.data.database import db
 from src.data import models
-from src.util import invoke_process, parse_sqlalchemy_url
+from src.util import invoke_process, parse_sqlalchemy_url, argparse
 
 def import_env():
     if os.path.exists('.env'):
