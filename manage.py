@@ -5,6 +5,7 @@ Usage: ./manage.py [submanager] <command>
 Manage script for development. Type ./manage.py for more info
 """
 import os
+import argparse
 
 from flask_script import Manager
 from flask_script.commands import ShowUrls
@@ -16,6 +17,7 @@ from src.data.base import Base
 from src.data.database import db
 from src.data import models
 from src.util import invoke_process, parse_sqlalchemy_url
+
 
 def import_env():
     if os.path.exists('.env'):
@@ -36,6 +38,7 @@ manager.add_command('db', db_manager)
 manager.add_command('test', test_manager)
 manager.add_command("routes", ShowUrls())
 
+
 @manager.shell
 def make_context_shell():
     """
@@ -45,6 +48,7 @@ def make_context_shell():
     # Loads all the models which inherit from Base
     models_map = {name: cls for name, cls in models.__dict__.items() if isinstance(cls, type(Base))}
     return dict(app=app, db=db, **models_map)
+
 
 @db_manager.option('--url', dest='url', type=parse_sqlalchemy_url,
                    default=app.config['SQLALCHEMY_DATABASE_URI'],
@@ -76,6 +80,7 @@ def repl(url):
     else:
         raise argparse.ArgumentTypeError("Dialect {} is not supported.".format(dialect.name))
 
+
 @test_manager.command
 def test_email():
     """
@@ -89,6 +94,7 @@ def test_email():
     msg.html = '<b>HTML</b> body'
     with app.app_context():
         mail.send(msg)
+
 
 @test_manager.command
 def scratch():

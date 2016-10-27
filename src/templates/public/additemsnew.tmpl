@@ -1,0 +1,26 @@
+{% from "macros/fields.tmpl" import render_input_field, render_submit %}
+{% extends "shared/layout.tmpl" %}
+
+{% block title %}Items{% endblock %}
+
+{% block content %}
+
+    <h3>Insert</h3>
+    <div class="form-group">Insert a new item</div>
+    <form method="POST" id='insert-form'>
+        {{ add_form.hidden_tag() }}
+        {{ render_input_field(add_form.name) }}
+        {{ render_input_field(add_form.amount) }}
+        {{ render_input_field(add_form.price) }}
+        {{ render_submit() }}
+    </form>
+
+    <h3>Delete</h3>
+    <div class="form-group">Delete an existing item</div>
+    <form method="POST" id='delete-form'>
+        {{ form.hidden_tag() }}
+        {{ render_input_field(form.id) }}
+        {{ render_submit() }}
+    </form>
+
+{% endblock %}

@@ -8,6 +8,7 @@ from ..util import generate_random_token
 from ...settings import app_config
 from ...extensions import bcrypt
 
+
 class User(CRUDModel, UserMixin):
     __tablename__ = 'users'
 

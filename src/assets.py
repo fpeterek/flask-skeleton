@@ -5,6 +5,7 @@ CSS_ASSETS = [
     Bundle('css/application.scss', filters='pyscss', output='css/compiled-scss.css')
 ]
 
+
 def register_assets(app):
     assets = Environment(app)
     assets.debug = app.debug

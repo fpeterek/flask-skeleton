@@ -1,0 +1,21 @@
+{% from "macros/fields.tmpl" import render_input_field, render_submit %}
+{% extends "shared/layout.tmpl" %}
+
+{% block title %}LIST{% endblock %}
+
+{% block content %}
+  <h3>Items</h3>
+ <table>
+    <thead><th>ID</th><th>Name</th><th>Amount</th><th>Price</th><th>Insert date</th></thead>
+    {% for n in data %}
+        <tr>
+            <td>{{ n.id }}</td>
+            <td>{{ n.name }}</td>
+            <td>{{ n.amount }}</td>
+            <td>{{ n.price }}</td>
+            <td>{{ n.insert_date }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+
+{% endblock %}
