@@ -80,3 +80,15 @@ def remove_items():
         except:
             return render_template('public/removeerror.tmpl', id=id_value)
     return render_template('public/removeitems.tmpl', form=form)
+
+
+@blueprint.route('/removeitems/<int:id_value>', methods=['GET', 'POST'])
+def remove_item_by_id(id_value):
+    try:
+        to_remove = db.session.query(AddItem).filter_by(id=id_value).first()
+        db.session.delete(to_remove)
+        db.session.commit()
+    except:
+        return render_template('public/removeerror.tmpl', id=id_value)
+    data = db.session.query(AddItem).all()
+    return render_template("public/listitems.tmpl", data=data)
